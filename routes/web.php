@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome-laravel', function () {
     return view('welcome');
 });
+
+Route::get('{catchall}', function ($catchall) {
+    return 'Slug: '.$catchall;
+})->where('catchall', '.*');
+
