@@ -2,6 +2,18 @@
 
 This report contains a Laravel 9 App with the integration with Storyblok
 
+# Configure/Setup
+
+## Preview URL
+For the preview URLin Storyblok UI:
+```
+Settings -> General -> Location (default environment)
+```
+Yyou need a hostname with HTTPS protocol.
+For your Laravel localhost, I suggest you to use Valet.
+Valet has the option **secure** to enable https protocol from your local environment.
+[More info about Enable local HTTPS](https://laravel.com/docs/9.x/valet#securing-sites)
+
 
 ## Learning Storyblok
 
