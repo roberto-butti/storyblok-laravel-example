@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Storyblok;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +18,5 @@ Route::get('/welcome-laravel', function () {
     return view('welcome');
 });
 
-Route::get('{catchall}', function ($catchall) {
-    return 'Slug: '.$catchall;
-})->where('catchall', '.*');
+Route::get('{catchall}', Storyblok::class)->where('catchall', '.*');
 
