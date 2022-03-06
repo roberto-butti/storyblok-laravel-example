@@ -4,6 +4,9 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
+use Illuminate\Support\Facades\Log;
+
+
 class DynamicBlock extends Component
 {
     public $block;
@@ -25,17 +28,21 @@ class DynamicBlock extends Component
      */
     public function render()
     {
-        $bladeComponent = $this->block->component;
-        // implode(",", array_keys(get_object_vars($this->block)));
+        
+        $bladeComponent = $this->block->component ?? '';
+        Log::debug(__METHOD__ . $bladeComponent);
+        if ($bladeComponent === "") {
+            
+        }
         try {
             $string = view("components.blocks." . $bladeComponent, [
                 "block" => $this->block,
             ])->render();
 
             return <<<blade
-            <div class="border-2 border-rose-600">
+ 
                 {$string}
-            </div>
+            
             blade;
         } catch (\Exception $e) {
             return "Error rendering components, " . $e->getMessage();

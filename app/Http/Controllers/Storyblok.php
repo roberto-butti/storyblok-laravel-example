@@ -24,13 +24,14 @@ class Storyblok extends Controller
             $catchall,
         ]);
         $params = [
-            "token" => env("STORYBLOK_ACCESS_TOKEN"),
+            "token" => env("STORYBLOK_PREVIEW_ACCESS_TOKEN"),
+            "version" => "draft",
         ];
-        $seconds = 0;
-        $responseBody = cache()->remember('users', $seconds, function () use ($endpoint, $params) {
-            return Http::acceptJson()->contentType("application/json")->get($endpoint, $params)->body();
-        });
-        //$response = Http::acceptJson()->contentType("application/json")->get($endpoint, $params);
+        $response = Http::acceptJson()->contentType("application/json")->get($endpoint, $params);
+        if ($response->status() === 404) {
+            return view("components/content/error/notfound", ['error' => "Are you sure that a page with slug: '" . $catchall .  "' exists on Storyblok?"]);
+        }
+        $responseBody = $response->body();
         $responseObject = json_decode($responseBody, false);
         if ($request->query('api', 0) == 1) {
             if ($request->query('onlycontent', 0) == 1) {

@@ -1,2 +1,1 @@
-
-    <a class="link link-hover" href="{{ $block->link->url }}">{{ $block->name }}</a>
+<li><a href="{{ $block->link->url }}">{{ $block->name }}</a></li>

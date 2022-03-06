@@ -1,0 +1,1 @@
+<li><a href="{{ $block->url->url }}" class=""><span class="label">{{ $block->label }}</span></a></li>
