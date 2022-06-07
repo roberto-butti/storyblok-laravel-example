@@ -1,14 +1,13 @@
 <?php
 
-
 namespace App\View\Components;
 
-use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 
 class BlocksRenderer extends Component
 {
     public $blocks;
+
     /**
      * Create a new component instance.
      *
@@ -24,6 +23,8 @@ class BlocksRenderer extends Component
      *
      * @return \Illuminate\Contracts\View\View|\Closure|string
      */
+
+
     public function render()
     {
         // For _editable fileds, if have SSI enabled with nginx
@@ -31,10 +32,10 @@ class BlocksRenderer extends Component
         // [an error occurred while processing the directive]
         // https://github.com/storyblok/storyblok/issues/290
         return <<<'blade'
-        
+
         @foreach ($blocks as $b)
         @if (property_exists($b, "_editable"))
-            {!! $b->_editable !!}
+            {!!  str_replace('<!--#', '<!-- #', $b->_editable)  !!}
         @endif
 
         @if (is_array($b))
