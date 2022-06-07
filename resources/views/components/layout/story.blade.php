@@ -6,7 +6,7 @@
         <!--link href="https://cdn.jsdelivr.net/npm/daisyui@2.4.0/dist/full.css" rel="stylesheet" type="text/css" />
         <script src="https://cdn.tailwindcss.com"></script-->
         <link href="/css/main.css" rel="stylesheet" type="text/css" />
-        
+
         <!--link href="https://fonts.googleapis.com/css?family=Work+Sans:200,400&display=swap" rel="stylesheet" /-->
     </head>
     <body class="landing is-preload">
@@ -20,12 +20,23 @@
 			<script src="/js/util.js"></script>
 			<script src="/js/main.js"></script>
 
-            <script type="text/javascript" src="//app.storyblok.com/storyblok-latest.js"></script>
-  <script type="text/javascript">
-    storyblok.init();
-    storyblok.on(['published', 'change'], function() {
-      window.location.reload(true);
-    });
+        <script src="https://app.storyblok.com/f/storyblok-v2-latest.js"></script>
+
+        <script type="text/javascript">
+            const storyblokInstance = new StoryblokBridge()
+            storyblokInstance.on('change', () => {
+                console.log("SAVED PAGE");
+                window.location.reload(true);
+            });
+            storyblokInstance.on('published', () => {
+                console.log("PUBLISHED PAGE");
+                window.location.reload(true);
+            });
+            storyblokInstance.on('input', (payload) => {
+                // addComments is not required anymore
+                console.log("input PAGE", payload);
+            })
+
   </script>
     </body>
 </html>

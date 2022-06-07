@@ -2,10 +2,9 @@
 
 namespace App\View\Components;
 
-use Illuminate\View\Component;
-
 use Illuminate\Support\Facades\Log;
 
+use Illuminate\View\Component;
 
 class DynamicBlock extends Component
 {
@@ -28,24 +27,31 @@ class DynamicBlock extends Component
      */
     public function render()
     {
-        
         $bladeComponent = $this->block->component ?? '';
         Log::debug(__METHOD__ . $bladeComponent);
         if ($bladeComponent === "") {
-            
         }
+
         try {
-            $string = view("components.blocks." . $bladeComponent, [
+            return view("components.blocks." . $bladeComponent, [
                 "block" => $this->block,
             ])->render();
+            /*
+                        return <<<blade
 
-            return <<<blade
- 
-                {$string}
-            
-            blade;
+                            {$string}
+
+                        blade;
+            */
         } catch (\Exception $e) {
-            return "Error rendering components, " . $e->getMessage();
+            return view("components.blocks.no_component", [
+                "block" => $this->block,
+            ])->render();
+            /*
+            return <<<blade
+{$string}
+blade;
+*/
         }
     }
 }
