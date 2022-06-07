@@ -47,6 +47,8 @@ class Storyblok extends Controller
             return view($pathTemplate, ['story' => $responseObject->story]);
         } catch (\InvalidArgumentException $e) {
             return "View " . $pathTemplate . " not found. " . $e->getMessage();
+        } catch (\Exception $e) {
+            return "View " . $pathTemplate . " not found. " . $e->getMessage();
         }
     }
 }
