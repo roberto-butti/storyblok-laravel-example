@@ -1,4 +1,4 @@
-<!-- Footer -->
+ <!-- Footer -->
 <footer id="footer">
     <ul class="icons">
         <x-blocks-renderer :blocks="$block->body" />
