@@ -31,6 +31,9 @@ class BlocksRenderer extends Component
         // you will receive
         // [an error occurred while processing the directive]
         // https://github.com/storyblok/storyblok/issues/290
+        //dd($this->blocks);
+
+
         return <<<'blade'
 
         @foreach ($blocks as $b)

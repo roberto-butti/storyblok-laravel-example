@@ -19,4 +19,3 @@ Route::get('/welcome-laravel', function () {
 });
 
 Route::get('{catchall}', Storyblok::class)->where('catchall', '.*');
-
