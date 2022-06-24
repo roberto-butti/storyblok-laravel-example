@@ -17,11 +17,13 @@ class Storyblok extends Controller
         $baseUrl = "https://api.storyblok.com";
         $basePath = "/v2/cdn/";
         $apiPath = "stories/";
+        $catchAlls= explode('/', $catchall);
+        $slug=end($catchAlls);
         $endpoint = implode("", [
             $baseUrl,
             $basePath,
             $apiPath,
-            $catchall,
+            $slug,
         ]);
         $params = [
             "token" => env("STORYBLOK_PREVIEW_ACCESS_TOKEN"),
@@ -29,7 +31,7 @@ class Storyblok extends Controller
         ];
         $response = Http::acceptJson()->contentType("application/json")->get($endpoint, $params);
         if ($response->status() === 404) {
-            return view("components/content/error/notfound", ['error' => "Are you sure that a page with slug: '" . $catchall .  "' exists on Storyblok?"]);
+            return view("components/content/error/notfound", ['error' => "Are you sure that a page with slug: '" . $slug .  "' exists on Storyblok?"]);
         }
         $responseBody = $response->body();
         $responseObject = json_decode($responseBody, false);
